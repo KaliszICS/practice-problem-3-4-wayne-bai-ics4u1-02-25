@@ -1,27 +1,71 @@
+import java.util.ArrayList;
 public class PracticeProblem {
 
 	public static void main(String args[]) {
+		for (int i = 0; i < 160; i++) {
+			System.out.println(i + ": " + a(i));
+		}
+	}
+
+	public static int a2(int n, ArrayList<Integer> inSeq) {
+		if (n == 0) {
+			return 0;
+		}
+		int subResult = a2(n - 1, inSeq) - n;
+		if (subResult > 0 && !inSeq.contains(subResult)) {
+			inSeq.add(subResult);
+			return subResult;
+		}
+		else {
+			int addResult = subResult + 2*n;
+			inSeq.add(addResult);
+			return addResult; // 2 *n because we initially already subtracted n
+		}
+		
+	}
+
+	public static int a(int n) {
+		ArrayList<Integer>  inSeq = new ArrayList<Integer>();
+		return a2(n, inSeq);
 
 	}
 
-	public static void q1() {
-		//Write question 1 code here
-	}
+	public static int[] recaman(int n) {
+		if (n <= 0) {
+			return new int[]{};
+		}
+		int[] nums = new int[n];
 
-	public static void q2() {
-		//Write question 2 code here
-	}
-
-	public static void q3() {
-		//Write question 3 code here
-	}
-
-	public static void q4() {
-		//Write question 4 code here
-	}
-
-	public static void q5() {
-		//Write question 5 code here
+		for (int i = 0; i < n; i++) {
+			nums[i] = a(i + 1);
+		}
+		return nums;
 	}
 
 }
+/*
+[![Open in Codespaces](https://classroom.github.com/assets/launch-codespace-2972f46106e565e64193e422d61a12cf1da4916b45550586e14ef0a7c637dd04.svg)](https://classroom.github.com/open-in-codespaces?assignment_repo_id=19074299)
+# Instructions  
+
+Create a function called recaman(int n) which returns an array of the first n integers of the following sequence.
+
+Examples:
+
+Input : n = 6
+Output : 1, 3, 6, 2, 7, 13
+
+Input : n = 17
+Output : 1, 3, 6, 2, 7, 13, 20, 12, 21,
+11, 22, 10, 23, 9, 24, 8, 25
+
+The rule states the following:
+
+a(0) = 0 </br>
+if a(n) > 0 and a(n) is not already included in the sequence, where a(n) = a(n - 1) - n, add it to the sequence</br>
+otherwise, a(n) = a(n-1) + n.
+
+Use Recursion to solve.
+
+If 0 or a negative number is given, return an empty array.
+
+*/
