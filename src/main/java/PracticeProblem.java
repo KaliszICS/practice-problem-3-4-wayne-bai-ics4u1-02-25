@@ -7,7 +7,7 @@ public class PracticeProblem {
 		}
 	}
 
-	public static int a2(int n, ArrayList<Integer> inSeq) {
+	public static int a2(int n, ArrayList<Integer> inSeq) { // helper
 		if (n == 0) {
 			return 0;
 		}
